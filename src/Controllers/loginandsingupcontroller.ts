@@ -77,10 +77,10 @@ export const LoginControl = async (req: any, res: any) => {
       console.log(token);
       res.cookie("authToken", token, {
         httpOnly: true, // Prevents access to the cookie via JavaScript
-        secure: false, // Only true in production with HTTPS
-        sameSite: "lax", // Strict option for better security
-        maxAge: 30 * 60 * 1000,
-        path: "/", // 30 minutes
+        secure: true,   // Required for `sameSite: "None"`
+        sameSite: "None", // Allows cross-site access
+        maxAge: 30 * 60 * 1000, // 30 minutes
+        path: "/", // Accessible across the entire site
       });
   
       // Prepare user data for the cookie (do not send sensitive info like password)

@@ -97,11 +97,12 @@ export const LoginControl = async (req: any, res: any) => {
       const isProduction = process.env.NODE_ENV === "production";
 
       res.cookie("navkeys", JSON.stringify(navitems), {
-        httpOnly: false, // Allow front-end to access this cookie 
-        secure: isProduction, // Use secure cookies only in production
+        httpOnly: false, // Allows client-side access (not recommended for sensitive data)
+        secure: isProduction, // Secure in production, false in development
         sameSite: isProduction ? "none" : "lax", // "none" for cross-site, "lax" for local
         maxAge: 24 * 60 * 60 * 1000, // 1 day
-        path: "/",
+        path: "/", // Available across the entire site
+        domain: ".gobidev.site",  // Add your domain in production
       });
       
       // console.log("cookie sended");

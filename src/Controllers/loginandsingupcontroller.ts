@@ -97,7 +97,7 @@ export const LoginControl = async (req: any, res: any) => {
       const isProduction = process.env.NODE_ENV === "production";
 
       res.cookie("navkeys", JSON.stringify(navitems), {
-        // httpOnly: true,
+        httpOnly: false, // Allow front-end to access this cookie 
         secure: isProduction, // Use secure cookies only in production
         sameSite: isProduction ? "none" : "lax", // "none" for cross-site, "lax" for local
         maxAge: 24 * 60 * 60 * 1000, // 1 day

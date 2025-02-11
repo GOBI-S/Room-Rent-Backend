@@ -98,13 +98,13 @@ export const LoginControl = async (req: any, res: any) => {
 
       res.cookie("navkeys", JSON.stringify(navitems), {
         httpOnly: false, // Allows client-side access (not recommended for sensitive data)
-        secure: isProduction, // Secure in production, false in development
-        sameSite: isProduction ? "none" : "lax", // "none" for cross-site, "lax" for local
+        secure: isProduction, // Use HTTPS only in production
+        sameSite: isProduction ? "none" : "lax", // Cross-site for production, lax for development
         maxAge: 24 * 60 * 60 * 1000, // 1 day
         path: "/", // Available across the entire site
-        domain: ".gobidev.site",  // Add your domain in production
+        domain: isProduction ? ".gobidev.site" : "localhost", // Use localhost in development
       });
-      
+
       // console.log("cookie sended");
     } catch (error) {
       // console.log("error whne fecting cookie");
